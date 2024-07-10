@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Ticket Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        input[type="password"],
+        select,
+        textarea {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .checkbox-label input {
+            margin-right: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket Booking Form</h1>
+        <form id="bookingForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <div id="nameError" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <div id="emailError" class="error"></div>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone">
+            <div id="phoneError" class="error"></div>
+
+            <label for="event">Event:</label>
+            <select id="event" name="event">
+                <option value="">Select an event</option>
+                <option value="concert">Concert</option>
+                <option value="theater">Theater</option>
+                <option value="sports">Sports</option>
+            </select>
+            <div id="eventError" class="error"></div>
+
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date">
+            <div id="dateError" class="error"></div>
+
+            <label for="time">Event Time:</label>
+            <input type="time" id="time" name="time">
+            <div id="timeError" class="error"></div>
+
+            <label for="seat">Seat Type:</label>
+            <select id="seat" name="seat">
+                <option value="">Select a seat type</option>
+                <option value="vip">VIP</option>
+                <option value="regular">Regular</option>
+                <option value="balcony">Balcony</option>
+            </select>
+            <div id="seatError" class="error"></div>
+
+            <label for="tickets">Number of Tickets:</label>
+            <input type="number" id="tickets" name="tickets" min="1" max="10">
+            <div id="ticketsError" class="error"></div>
+
+            <label for="promo">Promo Code:</label>
+            <input type="text" id="promo" name="promo">
+
+            <label for="requests">Special Requests:</label>
+            <textarea id="requests" name="requests" rows="4"></textarea>
+
+            <label for="ccnum">Credit Card Number:</label>
+            <input type="text" id="ccnum" name="ccnum">
+            <div id="ccnumError" class="error"></div>
+
+            <label for="expdate">Expiration Date:</label>
+            <input type="month" id="expdate" name="expdate">
+            <div id="expdateError" class="error"></div>
+
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv" maxlength="4">
+            <div id="cvvError" class="error"></div>
+
+            <div class="checkbox-label">
+                <input type="checkbox" id="terms" name="terms">
+                <label for="terms">I agree to the <a href="#">terms and conditions</a></label>
+            </div>
+            <div id="termsError" class="error"></div>
+
+            <input type="submit" value="Book Now">
+        </form>
+    </div>
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let valid = true;
+
+            // Name validation
+            const name = document.getElementById('name').value;
+            const nameError = document.getElementById('nameError');
+            if (name === '') {
+                nameError.textContent = 'Name is required';
+                valid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+            // Email validation
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            if (email === '') {
+                emailError.textContent = 'Email is required';
+                valid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // Phone validation
+            const phone = document.getElementById('phone').value;
+            const phoneError = document.getElementById('phoneError');
+            if (phone === '') {
+                phoneError.textContent = 'Phone number is required';
+                valid = false;
+            } else {
+                phoneError.textContent = '';
+            }
+
+            // Event validation
+            const eventSelect = document.getElementById('event').value;
+            const eventError = document.getElementById('eventError');
+            if (eventSelect === '') {
+                eventError.textContent = 'Please select an event';
+                valid = false;
+            } else {
+                eventError.textContent = '';
+            }
+
+            // Date validation
+            const date = document.getElementById('date').value;
+            const dateError = document.getElementById('dateError');
+            if (date === '') {
+                dateError.textContent = 'Event date is required';
+                valid = false;
+            } else {
+                dateError.textContent = '';
+            }
+
+            // Time validation
+            const time = document.getElementById('time').value;
+            const timeError = document.getElementById('timeError');
+            if (time === '') {
+                timeError.textContent = 'Event time is required';
+                valid = false;
+            } else {
+                timeError.textContent = '';
+            }
+
+            // Seat validation
+            const seat = document.getElementById('seat').value;
+            const seatError = document.getElementById('seatError');
+            if (seat === '') {
+                seatError.textContent = 'Please select a seat type';
+                valid = false;
+            } else {
+                seatError.textContent = '';
+            }
+
+            // Tickets validation
+            const tickets = document.getElementById('tickets').value;
+            const ticketsError = document.getElementById('ticketsError');
+            if (tickets === '' || tickets < 1) {
+                ticketsError.textContent = 'Please enter a valid number of tickets';
+                valid = false;
+            } else {
+                ticketsError.textContent = '';
+            }
+
+            // Credit Card validation
+            const ccnum = document.getElementById('ccnum').value;
+            const ccnumError = document.getElementById('ccnumError');
+            const ccnumRegex = /^\d{16}$/;
+            if (!ccnumRegex.test(ccnum)) {
+                ccnumError.textContent = 'Please enter a valid 16-digit credit card number';
+                valid = false;
+            } else {
+                ccnumError.textContent = '';
+            }
+
+            // Expiration Date validation
+            const expdate = document.getElementById('expdate').value;
+            const expdateError = document.getElementById('expdateError');
+            if (expdate === '') {
+                expdateError.textContent = 'Expiration date is required';
+                valid = false;
+            } else {
+                expdateError.textContent = '';
+            }
+
+            // CVV validation
